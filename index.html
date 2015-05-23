@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		h1{
+			text-transform: uppercase;
+		}
+	</style>
+</head>
+<body>
+	<pre><code id="license-text"></code></pre>
+	<script type="text/javascript">
+		function loadDoc(filename, done) {
+		    var xmlhttp;
+
+		    if (window.XMLHttpRequest) {
+		        // code for IE7+, Firefox, Chrome, Opera, Safari
+		        xmlhttp = new XMLHttpRequest();
+		    } else {
+		        // code for IE6, IE5
+		        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		    }
+
+		    xmlhttp.onreadystatechange = function() {
+		        if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
+		           if(xmlhttp.status == 200){
+		           		done(xmlhttp.responseText);
+		           }
+		           else if(xmlhttp.status == 400) {
+		              alert('There was an error 400');
+		           }
+		           else {
+		               alert("error " + xmlhttp.status);
+		           }
+		        }
+		    }
+
+		    xmlhttp.open("GET", filename + ".txt", true);
+		    xmlhttp.send();
+		}
+
+		var match,
+        pl     = /\+/g,  // Regex for replacing addition symbol with a space
+        search = /([^&=]+)=?([^&]*)/g,
+        decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
+        query  = window.location.search.substring(1);
+
+    	urlParams = {};
+    	while (match = search.exec(query)){
+       		urlParams[decode(match[1])] = decode(match[2]);
+    	}
+
+	    //alert(urlParams.l + " " + urlParams.uid);
+		loadDoc(urlParams.license, function(text) {
+			text = '<h1>project <a href="' + (urlParams.projectUrl || "#") + '">' + (urlParams.projectName || "") + '</a> (' + urlParams.license + ' license)</h1>' + text;
+			text = text.replace("<[email]>", "");
+			text = text.replace("[year]", urlParams.year);
+			text = text.replace("[fullname]", '<a href="' + urlParams.profile + '">'  + urlParams.fullname + '</a>');
+           	document.getElementById("license-text").innerHTML = text;
+		});
+	</script>
+	<noscript>Your browser does not support JavaScript!</noscript>
+</body>
+</html>

@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "build": "node badge/generate.js"
+  },
+  "devDependencies": {
+    "express": "^4.12.4",
+    "js-yaml": "^3.3.1"
+  }
+}
