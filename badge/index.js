@@ -9,7 +9,7 @@ var labelWidth = 50;
 var lic = "MIT";
 
 
-var dir = require("path").join(__dirname, "..", "lic/choosealicense.com/_licenses");
+var dir = require("path").join(__dirname, "..", "_licenses");
 
 function getFiles (dir, files_){
     files_ = files_ || [];
