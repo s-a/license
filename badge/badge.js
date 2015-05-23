@@ -96,7 +96,7 @@ function el(el) {
 }
 
 function dropshadowText(x, y, label) {
-  var yy = y + 4;
+  var yy = y;
   return el('text', label, {
       x: x 
     , y: yy
