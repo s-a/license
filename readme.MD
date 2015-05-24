@@ -16,7 +16,7 @@ I do not plan to delete this repo but maybe you want to fork it to be save :o).
 
 ```npm run build```
 
-# Available licenses
+# Available license badges
 [<img src="https://s-a.github.io/license/img/agpl-3.0.svg" />](https://s-a.github.io/license/?license=agpl-3.0&fullname=Stephan%20Ahlf&year=2015&profile=https://github.com/s-a&projectUrl=https://github.com/s-a/license&projectName=License%20Demo "")  
 
 
