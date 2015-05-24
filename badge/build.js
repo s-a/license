@@ -6,31 +6,49 @@ yaml = require('js-yaml');
 var labelWidth = 50;
 var lic = "MIT";
 
+var theTextWidth = {
+	"unlicense":100,
+	"no-license":85,
+	"mpl-2.0":165,
+	"mit":85,
+	"lgpl-3.0":245,
+	"lgpl-2.1":245,
+	"isc":85,
+	"gpl-3.0":205,
+	"gpl-2.0":205,
+	"epl-1.0":165,
+	"cc0-1.0":245,
+	"bsd-3-clause":250,
+	"bsd-2-clause":205,
+	"artistic-2.0":125,
+	"apache-2.0":125,
+	"agpl-3.0":245
+};
+
 
 var svg = function(options) {
 	var code = [];
-	console.log(options.width);
 	code.push('<svg xmlns="http://www.w3.org/2000/svg" width="' + options.width + '" height="20">');
 	code.push('	<linearGradient id="a" x2="0" y2="100%">');
 	code.push('		<stop offset="0" stop-color="#bbb" stop-opacity=".1"/>');
 	code.push('		<stop offset="1" stop-opacity=".1"/>');
 	code.push('	</linearGradient>');
-	code.push('	<rect rx="3" width="106" height="20" fill="#555"/>');
+	code.push('	<rect rx="3" width="' + options.width + '" height="20" fill="#555"/>');
 	code.push('	<rect rx="3" x="63" width="' + options.textWidth + '" height="20" fill="#4c1"/>');
 	code.push('	<path fill="#4c1" d="M63 0h4v20h-4z"/>');
-	code.push('	<rect rx="3" width="106" height="20" fill="url(#a)"/>');
-	code.push('	<g fill="#fff" text-anchor="middle" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">');
-	code.push('		<text x="32.5" y="15" fill="#010101" fill-opacity=".3">');
+	code.push('	<rect rx="3" width="' + options.width + '" height="20" fill="url(#a)"/>');
+	code.push('	<g fill="#fff" text-anchor="left" font-family="DejaVu Sans,Verdana,Geneva,sans-serif" font-size="11">');
+	code.push('		<text x="10" y="15" fill="#010101" fill-opacity=".3">');
 	code.push('			License');
 	code.push('		</text>');
-	code.push('		<text x="32.5" y="14">');
+	code.push('		<text x="10" y="14">');
 	code.push('			License');
 	code.push('		</text>');
-	code.push('		<text x="83.5" y="15" fill="#010101" fill-opacity=".3">');
-	code.push('			' + options._id);
+	code.push('		<text x="75" y="15" fill="#010101" fill-opacity=".3">');
+	code.push('			' + options.title);
 	code.push('		</text>');
-	code.push('		<text x="83.5" y="14">');
-	code.push('			' + options._id);
+	code.push('		<text x="75" y="14">');
+	code.push('			' + options.title);
 	code.push('		</text>');
 	code.push('	</g>');
 	code.push('</svg>');
@@ -68,7 +86,7 @@ for (var i = 0; i < files.length; i++) {
 	  	var doc = yaml.safeLoad(data[1]);
 
 		fs.writeFileSync(path.join(__dirname, "..", path.basename(file)), data[2]);
-	  console.log(file);
+
 /*
 	  console.log(doc.nickname || doc.title);
 	  console.log(doc.description);
@@ -81,10 +99,11 @@ for (var i = 0; i < files.length; i++) {
 
   	//console.log(licenseName, licenseName.length);
   	doc._id = path.basename(file, '.txt');
-  	doc.width = 100;
-  	doc.textWidth = 243;
+  	/*doc.textWidth = 43;
+  	doc.width = 106;*/
+  	doc.textWidth = theTextWidth[path.basename(file, '.txt')];
+  	doc.width = 63 + doc.textWidth;
   	var svgFilename = __dirname + '/../img/' + path.basename(file, '.txt') + '.svg';
-  	console.log("done");
   	fs.writeFileSync(svgFilename, svg(doc).data);
 
 	/*

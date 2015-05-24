@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "build": "node badge/generate.js"
+    "build": "node badge/build.js"
   },
   "devDependencies": {
     "express": "^4.12.4",
