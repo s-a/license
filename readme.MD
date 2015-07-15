@@ -1,4 +1,5 @@
 # About
+[![Donate](http://s-a.github.io/donate/donate.svg)](http://s-a.github.io/donate/)  
 
 This is a central permanent host for the license details of your projects full under your control. 
 This repo serves many license badges and provides the license texts which can be linked from markdown files hosted at Github or other code hosts.  
